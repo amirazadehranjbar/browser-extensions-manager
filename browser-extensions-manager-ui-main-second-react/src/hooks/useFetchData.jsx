@@ -18,9 +18,6 @@ const useFetchData = (Data) => {
         dispatch(getExtensions());        
     }, [dispatch]);
 
-    // useEffect(() => {
-    //     dispatch(updateActive({id:id,active:active}));
-    // }, [active, dispatch, id]);
 
     const derived = useMemo(() => {
         const list = extentionList || [];

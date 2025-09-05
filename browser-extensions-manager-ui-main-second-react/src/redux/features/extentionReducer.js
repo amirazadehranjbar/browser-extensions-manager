@@ -48,6 +48,7 @@ const extensionSlice = createSlice(
             isError: false,
             isLoading: false,
             isUpdating: false,
+            filterData:"all",
         },
 
         extraReducers: (builder) => {
@@ -93,7 +94,15 @@ const extensionSlice = createSlice(
 
         },
 
+        reducers:{
+            setFilterData:(extension , action)=>{
+                extension.filterData = action.payload;
+            }
+        }
+
     }
 );
+
+export const {setFilterData} =extensionSlice.actions;
 
 export default extensionSlice.reducer;

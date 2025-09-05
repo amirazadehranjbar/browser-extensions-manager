@@ -1,14 +1,18 @@
 import Switch from "@mui/material/Switch";
 import useFetchData from "../hooks/useFetchData.jsx";
 import {updateActive} from "../redux/features/extentionReducer.js";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 const label = {inputProps: {"aria-label": "Switch demo"}};
 
 const ExtensionCard = () => {
 
 
-    const {data, isLoading, isError, isUpdating} = useFetchData("all");
+    const {filterData} = useSelector((state)=>state.extension);
+
+
+
+    const {data, isLoading, isError, isUpdating} = useFetchData(filterData);
 
     const dispatch = useDispatch();
 
@@ -35,7 +39,9 @@ const ExtensionCard = () => {
                             </div>
                         </div>
                         <div className="card-bottom">
-                            <button>remove</button>
+                            <button
+
+                            >remove</button>
                             <Switch {...label} checked={d.isActive} onChange={() => handleUpdateActive(d._id, d.isActive)}/>
                         </div>
                     </div>
