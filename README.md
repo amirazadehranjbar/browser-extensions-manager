@@ -3,6 +3,11 @@
 A full-stack project that manages browser extensions with **React (frontend)** and **Node.js + Express + MongoDB (backend)**.
 
 ---
+## 👷 Work in Progress
+
+This project is **still under active development** and not yet complete.  
+New features and improvements are being added step by step.
+
 
 ## 📂 Project Structure
 
