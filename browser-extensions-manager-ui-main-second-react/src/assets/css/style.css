@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    background: linear-gradient(to top, #260053, #190031);
+    height: 100vh;
+    font-family: "Google Sans Code", monospace;
+    padding: 1rem;
+    margin: 2rem 4rem;
+}
+
+/* region header 1️⃣*/
+.header {
+    display: flex;
+    flex-direction: row;
+    background-color: #1F2535;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    padding: 0.7rem 1rem;
+    box-shadow: 0 0 5px #2F354D;
+
+}
+
+.header button {
+    background-color: #2F354D;
+    border: 0;
+    margin: 0;
+    border-radius: 10px;
+    padding: 0.7rem;
+    transition:all 0.3s;
+}
+
+.header button:hover{
+    cursor: pointer;
+    box-shadow: 0 0 15px gainsboro;
+}
+
+
+.header h2{
+    margin-left: 0.8rem;
+}
+
+#theme-toggle {
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+.header p {
+    color: bisque;
+}
+
+.header div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* endregion */
+
+
+/* region title 2️⃣ */
+.title {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+    width: 100%;
+    /* flex-grow: 1; */
+}
+
+.title h2 {
+    color: bisque;
+    flex-grow: 100;
+    margin: 0;
+}
+
+.title div {
+    flex-grow: 1;
+    margin: 0;
+}
+
+.title-button {
+    padding: 0.2rem 1rem;
+    border-radius: 15px;
+    background-color: #2F354D;
+    border: none;
+    color: bisque;
+    font-family: inherit;
+    margin: 0 0.2rem;
+    transition: 0.5s;
+}
+
+.title-button:hover{
+  cursor: pointer;
+  scale: 1.1;
+  background-color: #9CE287;
+}
+
+/* endregion */
+
+/*region extension list 3️⃣*/
+.card-container{
+    background-color: #1F2535;
+    width: 80%;
+    border: 1px solid darkgrey;
+    border-radius: 10px;
+    padding: 0.8rem;
+}
+
+.card-top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 0.5rem;
+}
+
+.card-top-content{
+    margin-left: 0.5rem;
+    padding: 0 0.5rem;
+}
+.card-top-content h3{
+    color: white;
+    margin-bottom: 0.2rem;
+}
+.card-top-content p{
+    color: rgba(255, 255, 255, 0.4);
+    font-size: small;
+}
+
+.card-bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card-bottom button{
+    padding: 0.6rem 1.2rem;
+    background-color: transparent;
+    border-radius: 20px;
+    border: 1px solid #2F354D;
+    color: white;
+    font-family: "Google Sans Code", monospace;
+}
+/*endregion*/
+
+/*region extension list*/
+.extensionsList{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(4,1fr);
+    row-gap: 0.8rem;
+
+}
+/*endregion*/
+
+/*region media query*/
+@media screen and (max-width: 900px) {
+   .toggle-container{
+       /*width: 30%;*/
+   }
+}
+
+@media screen and (max-width: 720px) {
+
+}
+
+
+/*endregion*/
