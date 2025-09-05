@@ -101,6 +101,18 @@ body {
     transition: 0.5s;
 }
 
+.title-button-active {
+    padding: 0.2rem 1rem;
+    border-radius: 15px;
+    background-color: #2F354D;
+    border: none;
+    color: bisque;
+    font-family: inherit;
+    margin: 0 0.2rem;
+    transition: 0.5s;
+    box-shadow: 0 0 15px #9CE287;
+}
+
 .title-button:hover{
   cursor: pointer;
   scale: 1.1;
