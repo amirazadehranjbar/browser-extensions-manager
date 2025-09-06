@@ -1,6 +1,6 @@
 import Switch from "@mui/material/Switch";
 import useFetchData from "../hooks/useFetchData.jsx";
-import {updateActive} from "../redux/features/extentionReducer.js";
+import {removeExtension, updateActive} from "../redux/features/extentionReducer.js";
 import {useDispatch, useSelector} from "react-redux";
 
 const label = {inputProps: {"aria-label": "Switch demo"}};
@@ -19,6 +19,12 @@ const ExtensionCard = () => {
     const handleUpdateActive = async (id,isActive)=>{
         if(isUpdating) return;
         await dispatch(updateActive({id, active: !isActive}));
+    }
+
+    const handleRemoveData = async (id)=>{
+
+        await dispatch(removeExtension(id));
+
     }
 
     if (isLoading) return <p>Loading...</p>;
@@ -40,6 +46,9 @@ const ExtensionCard = () => {
                         </div>
                         <div className="card-bottom">
                             <button
+                                onClick={()=>{
+                                    handleRemoveData(d._id);
+                                }}
 
                             >remove</button>
                             <Switch {...label} checked={d.isActive} onChange={() => handleUpdateActive(d._id, d.isActive)}/>

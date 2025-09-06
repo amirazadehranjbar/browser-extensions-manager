@@ -23,7 +23,7 @@ export const getExtensions = createAsyncThunk(
 //region update active
 export const updateActive = createAsyncThunk(
     "updateActive",
-    async ({id,active}, thunkAPI) => {
+    async ({id, active}, thunkAPI) => {
 
         try {
             const res = await axios.post("http://localhost:8000/api/ext-list", {id, active});
@@ -39,6 +39,25 @@ export const updateActive = createAsyncThunk(
 )
 // endregion
 
+//region remove data
+export const removeExtension = createAsyncThunk(
+    "removeExtension",
+    async ({id}, thunkAPI) => {
+        try {
+            const res = await axios.delete("http://localhost:8000/api/ext-list", {data: {id}});
+
+            return res.data.extensions;
+
+        } catch (e) {
+            console.log(e);
+            return thunkAPI.rejectWithValue({
+                message: e?.response?.data?.message || e?.message || "cant update active value"
+            });
+        }
+    }
+)
+//endregion
+
 
 const extensionSlice = createSlice(
     {
@@ -48,7 +67,8 @@ const extensionSlice = createSlice(
             isError: false,
             isLoading: false,
             isUpdating: false,
-            filterData:"all",
+            isRemoving: false,
+            filterData: "all",
         },
 
         extraReducers: (builder) => {
@@ -59,43 +79,67 @@ const extensionSlice = createSlice(
                     extension.isLoading = true;
                     extension.isError = false;
                     extension.isUpdating = false;
+                    extension.isRemoving = false;
                 })
 
                 .addCase(getExtensions.fulfilled, (extension, action) => {
                     extension.isLoading = false;
                     extension.isError = false;
                     extension.isUpdating = false;
+                    extension.isRemoving = false;
                     extension.extentionList = action.payload;
                 })
 
                 .addCase(getExtensions.rejected, (extension) => {
                     extension.isLoading = false;
                     extension.isUpdating = false;
+                    extension.isRemoving = false;
                     extension.isError = true;
                 })
                 // update active
                 .addCase(updateActive.pending, (extension) => {
-                    extension.isLoading=false;
-                    extension.isError=false;
-                    extension.isUpdating=true;
+                    extension.isLoading = false;
+                    extension.isError = false;
+                    extension.isUpdating = true;
+                    extension.isRemoving = false;
                 })
-                .addCase(updateActive.fulfilled, (extension,action) => {
-                    extension.isLoading=false;
-                    extension.isError=false;
-                    extension.isUpdating=false;
+                .addCase(updateActive.fulfilled, (extension, action) => {
+                    extension.isLoading = false;
+                    extension.isError = false;
+                    extension.isUpdating = false;
+                    extension.isRemoving = false;
                     extension.extentionList = action.payload;
                 })
-                .addCase(updateActive.rejected,(extension)=>{
-                    extension.isLoading=false;
-                    extension.isError=true;
-                    extension.isUpdating=false;
+                .addCase(updateActive.rejected, (extension) => {
+                    extension.isLoading = false;
+                    extension.isError = true;
+                    extension.isUpdating = false;
+                    extension.isRemoving = false;
+                })
+                //remove data
+                .addCase(removeExtension.pending, (extension) => {
+                    extension.isRemoving = true;
+                    extension.isLoading = false;
+                    extension.isError = false;
+                    extension.isUpdating = false;
+                })
+
+                .addCase(removeExtension.fulfilled, (extension, action) => {
+                    extension.isRemoving = false;
+                    console.log(action.payload);
+                    extension.extentionList = action.payload;
+                })
+
+                .addCase(removeExtension.rejected, (extension) => {
+                    extension.isRemoving = false;
+                    extension.isError = true;
                 })
 
 
         },
 
-        reducers:{
-            setFilterData:(extension , action)=>{
+        reducers: {
+            setFilterData: (extension, action) => {
                 extension.filterData = action.payload;
             }
         }
@@ -103,6 +147,6 @@ const extensionSlice = createSlice(
     }
 );
 
-export const {setFilterData} =extensionSlice.actions;
+export const {setFilterData} = extensionSlice.actions;
 
 export default extensionSlice.reducer;

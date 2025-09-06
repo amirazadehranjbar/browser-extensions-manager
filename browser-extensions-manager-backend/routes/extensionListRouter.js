@@ -34,4 +34,26 @@ router.post("/api/ext-list", async (req, res) => {
   }
 });
 
+//remove data
+router.delete("/api/ext-list" , async(req , res)=>{
+
+
+  try {
+    
+    const {id} = req.body;
+    console.log(id);
+    
+
+    await ExtensionModel.findOneAndDelete(id,{new:true});
+    const extensions = await ExtensionModel.find({});
+    res.status(201).json({extensions});
+
+  } catch (error) {
+
+    res.status(401).json({message:`cant remove data ${error}`});
+    
+  }
+
+})
+
 module.exports = router;
